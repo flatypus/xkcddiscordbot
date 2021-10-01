@@ -8,14 +8,14 @@ client = discord.Client()
 def getxkcdquote():
     URL = f"https://xkcd.com/{random.randint(1,2000)}/"
     page = requests.get(URL)
-    soup = BeautifulSoup(page.content, "lxml")
-    breme = soup.find_all("a")
-    png = ''
-    for _ in breme:
+    content = BeautifulSoup(page.content, "lxml")
+    a = content.find_all("a")
+    picturelink = ''
+    for _ in a:
         item = str(_)
         if "https://imgs.xkcd.com/" in item:
-            png = item
-    return((png.split('>')[1]).split('<')[0])
+            picturelink = item
+    return(((picturelink).split('>')[1]).split('<')[0])
 
 @client.event
 async def on_ready():
@@ -29,4 +29,4 @@ async def on_message(message):
         xkcd = getxkcdquote()
         await message.channel.send(xkcd)        
 
-client.run(TOKEN) #YOUR DISCORD TOKEN HERE
+client.run(YOUR_TOKEN_HERE)
