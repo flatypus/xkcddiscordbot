@@ -30,8 +30,8 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content == '!xkcd':
-        image = getxkcdquote()[0]
-        title = getxkcdquote()[1]
+        quoteinfo = getxkcdquote()
+        image, title = quoteinfo[0], quoteinfo[1]
         embed=discord.Embed(title=title)
         embed.set_image(url=image)
         await message.channel.send(embed=embed)      
